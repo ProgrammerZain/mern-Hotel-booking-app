@@ -6,6 +6,9 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.send("vbnm");
 });
+router.get("/register", (req, res) => {
+  res.send("Regiter");
+});
 router.post(
   "/register",
   [
@@ -43,7 +46,7 @@ router.post(
         secure: process.env.NODE_ENV === "production",
         maxAge: 86400000,
       });
-      res.sendStatus(200);
+      res.status(200).json({ message: "User registered OK" });
     } catch (error) {
       console.log(error);
 
