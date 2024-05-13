@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 export const register = async (formdata: RegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
     method: "POST",
@@ -13,6 +13,8 @@ export const register = async (formdata: RegisterFormData) => {
   if (!response.ok) {
     throw new Error(responseBody.message);
   }
+
+  return responseBody;
 };
 export const signIn = async (FormData: SignInFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/login`, {

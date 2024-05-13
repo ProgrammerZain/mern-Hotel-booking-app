@@ -10,7 +10,7 @@ router.post(
   "/login",
   [
     check("email", "Email is required").isEmail(),
-    check("password", "Password with  or more charaqcters required").isLength({
+    check("password", "Password with  or more characters required").isLength({
       min: 6,
     }),
   ],
@@ -31,7 +31,7 @@ router.post(
         return res.status(400).json({ message: "Invalid Credentials" });
       }
       const token = jwt.sign(
-        { userId: user.id },
+        { userId: user._id },
         process.env.JWT_SECRET_KEY as string,
         {
           expiresIn: "1d",
