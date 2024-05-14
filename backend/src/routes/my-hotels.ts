@@ -7,7 +7,7 @@ import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
 // import cloudinary from "cloudinary";
 const router = express.Router();
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
 
 // const storage = multer.diskStorage({
 //   destination: function (req: any, file: any, cb: any) {
@@ -105,10 +105,7 @@ router.post(
         //     let dataURI = "data:" + image.mimetype + ",base64," + b64;
         //     const res = await cloudinary.v2.uploader.upload(dataURI);
         //     return res.url;
-        const targetPath = path.join(
-          __dirname,
-          "./uploads/" + image.originalname
-        );
+        const targetPath = path.join(__dirname, "./uploads/" + image.filename);
         return targetPath;
       });
       const imageUrls = await Promise.all(uploadPromises);
