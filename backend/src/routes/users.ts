@@ -4,10 +4,10 @@ import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 const router = express.Router();
 router.get("/", (req, res) => {
-  res.send("vbnm");
+  res.status(200).json({ message: "User" });
 });
 router.get("/register", (req, res) => {
-  res.send("Regiter");
+  res.status(200).json({ message: "Register" });
 });
 router.post(
   "/register",
