@@ -5,9 +5,9 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
-import path from "path";
+// import path from "path";
 import myHotelRoutes from "./routes/my-hotels";
-
+import hotelRoutes from "./routes/hotels";
 // import { v2 as cloudinary } from "cloudinary";
 // cloudinary.config({
 //   cloud_name: process.env.C,
@@ -41,6 +41,8 @@ app.use("/images", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/hotels", hotelRoutes);
+
 app.get("*", (req: Request, res: Response) => {
   res.send(404).json({ message: "Error 404 wrong url" });
 });

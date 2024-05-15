@@ -13,6 +13,7 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "react": "^18.2.0",
+    "react-datepicker": "^6.9.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.2.1",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
+    "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",

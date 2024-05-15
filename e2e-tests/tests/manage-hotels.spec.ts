@@ -33,10 +33,6 @@ test("should allow user to add a hotel", async ({ page }) => {
 });
 test("should display hotels", async ({ page }) => {
   await page.goto(`${UI_URL}/my-hotels`);
-  // await expect(page.getByText("Dublin Gateways")).toBeVisible();
-  // await expect(page.getByText("Lorem ipsum, dolor ")).toBeVisible();
-  // await expect(page.getByText("Dublin,Ireland")).toBeVisible();
-  // await expect(page.getByText("All Inclusive")).toBeVisible();
   await expect(page.getByText("q").first()).toBeVisible();
   await expect(page.getByText("qqqq").first()).toBeVisible();
   await expect(page.getByText("q,q").first()).toBeVisible();
@@ -45,7 +41,6 @@ test("should display hotels", async ({ page }) => {
   await expect(page.getByText("$120 per Night").first()).toBeVisible();
   await expect(page.getByText("3 adults, 3 children").first()).toBeVisible();
   await expect(page.getByText("3 Star Rating").first()).toBeVisible();
-  // await page.locator("[name=city]").fill("Test 111111");
 
   await expect(
     page.getByRole("link", { name: "View Details" }).first()
@@ -58,13 +53,22 @@ test("should edit hotel", async ({ page }) => {
   await page.goto(`${UI_URL}/my-hotels`);
   await page.getByRole("link", { name: "View Details" }).first().click();
   await page.waitForSelector('[name="name"]', { state: "attached" });
-  await expect(page.locator('[name="name"]')).toHaveValue("Qwerty");
-  await page.locator('[name="name"]').fill("Q");
+  await expect(page.locator('[name="name"]')).toHaveValue("first");
+  await page.locator('[name="name"]').fill("Dublin Gateways updated");
   await page.getByRole("button", { name: "Save" }).click();
   await expect(page.getByText("Hotel Saved!")).toBeVisible();
   await page.reload();
-  await expect(page.locator('[name="name"]')).toHaveValue("Q");
+  await expect(page.locator('[name="name"]')).toHaveValue(
+    "Dublin Gateways updated"
+  );
 
-  await page.locator('[name="name"]').fill("Qwerty");
+  await page.locator('[name="name"]').fill("first");
   await page.getByRole("button", { name: "Save" }).click();
+});
+test("should show hotel search results", async ({ page }) => {
+  await page.goto(`${UI_URL}/`);
+  await page.getByPlaceholder("Where are you going?").fill("t");
+  await page.getByRole("button", { name: "Search" }).first().click();
+  await expect(page.getByText("3 Hotels foundin t").first()).toBeVisible();
+  await expect(page.getByText("Test 111111").first()).toBeVisible();
 });
