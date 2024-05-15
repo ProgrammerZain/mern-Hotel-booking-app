@@ -6,9 +6,9 @@ import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
 import path from "path";
-// import { v2 as cloudinary } from "cloudinary";
 import myHotelRoutes from "./routes/my-hotels";
 
+// import { v2 as cloudinary } from "cloudinary";
 // cloudinary.config({
 //   cloud_name: process.env.C,
 // });
@@ -35,12 +35,14 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+// app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+// res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+app.use("/images", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
 app.get("*", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+  res.send(404).json({ message: "Error 404 wrong url" });
 });
 let PORT = 7000;
 app.listen(PORT, () => {
