@@ -72,3 +72,11 @@ test("should show hotel search results", async ({ page }) => {
   await expect(page.getByText("3 Hotels foundin t").first()).toBeVisible();
   await expect(page.getByText("Test 111111").first()).toBeVisible();
 });
+test("should show hotel detail", async ({ page }) => {
+  await page.goto(`${UI_URL}/`);
+  await page.getByPlaceholder("Where are you going?").fill("t");
+  await page.getByRole("button", { name: "Search" }).first().click();
+  await page.getByText("Dublin Gateways").first().click();
+  await expect(page).toHaveURL(/detail/);
+  await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
+});
