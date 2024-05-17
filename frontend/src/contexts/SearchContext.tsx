@@ -15,7 +15,12 @@ type SearchContext = {
   ) => void;
 };
 const SearchContext = React.createContext<SearchContext | undefined>(undefined);
-
+const getsessionStorageValue = (name: any) => {
+  return sessionStorage.getItem(name);
+};
+const setsessionStorageValue = (name: any, value: any) => {
+  sessionStorage.setItem(name, value);
+};
 type SearchContextProviderProps = {
   children: React.ReactNode;
 };
@@ -23,12 +28,24 @@ type SearchContextProviderProps = {
 export const SearchContextProvider = ({
   children,
 }: SearchContextProviderProps) => {
-  const [destination, setDestination] = useState<string>("");
-  const [checkIn, setCheckIn] = useState<Date>(new Date());
-  const [checkOut, setCheckOut] = useState<Date>(new Date());
-  const [adultCount, setAdultCount] = useState<number>(1);
-  const [childCount, setChildCount] = useState<number>(0);
-  const [hotelId, sethotelId] = useState<string>("");
+  const [destination, setDestination] = useState<string>(
+    getsessionStorageValue("destination") || ""
+  );
+  const [checkIn, setCheckIn] = useState<Date>(
+    new Date(getsessionStorageValue("checkIn") || new Date().toISOString())
+  );
+  const [checkOut, setCheckOut] = useState<Date>(
+    new Date(getsessionStorageValue("checkOut") || new Date().toISOString())
+  );
+  const [adultCount, setAdultCount] = useState<number>(
+    parseInt(getsessionStorageValue("adultCount") || "1")
+  );
+  const [childCount, setChildCount] = useState<number>(
+    parseInt(getsessionStorageValue("adultCount") || "0")
+  );
+  const [hotelId, sethotelId] = useState<string>(
+    getsessionStorageValue("hotelId") || ""
+  );
 
   const saveSearchValue = (
     destination: string,
@@ -46,7 +63,13 @@ export const SearchContextProvider = ({
     setChildCount(childCount);
     if (hotelId) {
       sethotelId(hotelId);
+      setsessionStorageValue("hotelId", hotelId);
     }
+    setsessionStorageValue("destination", destination);
+    setsessionStorageValue("checkIn", checkIn.toISOString());
+    setsessionStorageValue("checkOut", checkOut.toISOString());
+    setsessionStorageValue("adultCount", adultCount.toString());
+    setsessionStorageValue("childCount", childCount.toString());
   };
 
   return (

@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { AiFillStar } from "react-icons/ai";
-import { DiVim } from "react-icons/di";
 import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
 function Detail() {
   const { hotelId } = useParams();
@@ -39,7 +38,10 @@ function Detail() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         {hotel.facilities.map((facility) => (
-          <div className="border border-slate-300 rounded-sm p-3">
+          <div
+            key={facility}
+            className="border border-slate-300 rounded-sm p-3"
+          >
             {facility}
           </div>
         ))}

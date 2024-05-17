@@ -16,6 +16,7 @@ router.post(
   ],
   async function (req: Request, res: Response) {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
       return res.send(400).json({ message: errors.array() });
     }
@@ -23,6 +24,7 @@ router.post(
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
+
       if (!user) {
         return res.status(400).json({ message: "Invalid Credentials" });
       }

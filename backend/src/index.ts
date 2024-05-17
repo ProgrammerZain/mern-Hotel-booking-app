@@ -5,9 +5,10 @@ import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
-// import path from "path";
 import myHotelRoutes from "./routes/my-hotels";
 import hotelRoutes from "./routes/hotels";
+
+// import path from "path";
 // import { v2 as cloudinary } from "cloudinary";
 // cloudinary.config({
 //   cloud_name: process.env.C,
