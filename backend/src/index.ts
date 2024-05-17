@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
 import myHotelRoutes from "./routes/my-hotels";
 import hotelRoutes from "./routes/hotels";
+import bookingRoutes from "./routes/my-bookings";
 
 // import path from "path";
 // import { v2 as cloudinary } from "cloudinary";
@@ -36,6 +37,7 @@ app.use(
     credentials: true,
   })
 );
+//For Build
 // app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 // res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 app.use("/images", express.static("uploads"));
@@ -43,7 +45,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
-
+app.use("/api/my-bookings", bookingRoutes);
 app.get("*", (req: Request, res: Response) => {
   res.send(404).json({ message: "Error 404 wrong url" });
 });
