@@ -8,7 +8,7 @@ function LatestDestinationCard({ hotel }: Props) {
   return (
     <Link
       to={`/detail/${hotel._id}`}
-      className="relative cursor-pointer overflow-hidden rounded-md"
+      className="relative cursor-pointer overflow-hidden rounded-md w-full h-full"
     >
       <div className="h-[300px]">
         <img

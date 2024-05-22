@@ -18,7 +18,7 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.send(400).json({ message: errors.array() });
+      return res.status(400).json({ message: errors.array() });
     }
 
     const { email, password } = req.body;
@@ -59,5 +59,5 @@ router.post("/logout", (req: Request, res: Response) => {
   res.cookie("auth_token", "", {
     expires: new Date(0),
   });
-  res.send(200).json({ message: "Logged Out" });
+  res.status(200).json({ message: "Logged Out" });
 });

@@ -16,7 +16,7 @@ function Layout({ children }: Props) {
       <div className="m-5 lg:container lg:mx-auto ">
         <SearchBar />
       </div>
-      <div className="container mx-auto py-10 flex-1">{children}</div>
+      <div className="mx-auto py-10 flex-1 px-5  sm:w-4/5">{children}</div>
       <Footer />
     </div>
   );

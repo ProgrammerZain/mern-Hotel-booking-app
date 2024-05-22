@@ -12,7 +12,8 @@ import bookingRoutes from "./routes/my-bookings";
 // import path from "path";
 // import { v2 as cloudinary } from "cloudinary";
 // cloudinary.config({
-//   cloud_name: process.env.C,
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+// api_key:process.env.CLOUDINARY_API_KEY,api_secret:process.env.CLOUDINARY_API_SECRET
 // });
 
 mongoose
@@ -47,7 +48,7 @@ app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/my-bookings", bookingRoutes);
 app.get("*", (req: Request, res: Response) => {
-  res.send(404).json({ message: "Error 404 wrong url" });
+  res.status(404).json({ message: "Error 404 wrong url" });
 });
 let PORT = 7000;
 app.listen(PORT, () => {

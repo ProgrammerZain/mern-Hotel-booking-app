@@ -22,10 +22,10 @@ const uploadImages = (imageFiles: Express.Multer.File[]) => {
   return imageUrls;
 };
 
-// const uploadImages = async (imageFiles: Express.Multer.File[]) => {
+// const uploadImages = async (imageFiles: Express.Multer.File[]) => { --for CLOUDINARY
 //   const uploadPromises = imageFiles.map(async (image) => {
 //     const b64 = Buffer.from(image.buffer).toString("base64");
-//     let dataURI = "data:" + image.mimetype + ",base64," + b64;
+//     let dataURI = "data:" + image.mimetype + ";base64," + b64;
 //     const res = await cloudinary.v2.uploader.upload(dataURI);
 //     return res.url;
 //   });
@@ -33,16 +33,6 @@ const uploadImages = (imageFiles: Express.Multer.File[]) => {
 //   return imageUrls;
 // };
 const router = express.Router();
-// const storage = multer.memoryStorage();
-
-// const storage = multer.diskStorage({
-//   destination: function (req: any, file: any, cb: any) {
-//     cb(null, 'uploads');
-//   },
-//   filename: function (req: any, file: any, cb: any) {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
 
 const localStorage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -56,22 +46,6 @@ const localStorage = multer.diskStorage({
     callback(null, Date.now() + path.extname(file.originalname));
   },
 });
-// const upload = multer({
-//   storage: storage,
-//   fileFilter: (req: any, file: any, cb: any) => {
-//     if (
-//       file.mimetype == 'image/png' ||
-//       file.mimetype == 'image/jpg' ||
-//       file.mimetype == 'image/jpeg'
-//     ) {
-//       cb(null, true);
-//     } else {
-//       cb(null, false);
-//       return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-//     }
-//   },
-// });
-
 const upload = multer({
   storage: localStorage, //storage:storage    -for cloudinary
   limits: {
@@ -92,15 +66,6 @@ const upload = multer({
     }
   },
 });
-/**
- * 
- * fs.readFile(req.files.urForm-data_name.path, function (err, data) {
-       fs.writeFile(newPath, data, function (err) {
-      });
-    });
- });
- * 
- */
 router.post(
   "/",
   verifyToken,
@@ -120,7 +85,6 @@ router.post(
   async function (req: Request, res: Response) {
     try {
       const imageFiles = req.files as Express.Multer.File[];
-      //   const newHotel = req.body;
       const imageUrls = uploadImages(imageFiles);
       const newHotel: HotelType = req.body;
       newHotel.imageUrls = imageUrls;

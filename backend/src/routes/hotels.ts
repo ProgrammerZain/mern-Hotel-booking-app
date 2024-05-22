@@ -62,6 +62,7 @@ const constructSearchQuery = (queryParams: any) => {
 router.get("/search", async (req: Request, res: Response) => {
   try {
     const query = constructSearchQuery(req.query);
+
     let sortOptions = {};
     switch (req.query.sortOption) {
       case "starRatings":
@@ -201,14 +202,16 @@ router.post(
           },
         }
       );
+
       if (!hotel) {
         return res.status(400).json({ message: "hotel not found" });
       }
       await hotel.save();
+      console.log("hotel", hotel, "...................................");
       res.sendStatus(200);
     } catch (error) {
       console.log(error);
-      res.send(500).json({ message: "Something went wrong" });
+      res.status(500).json({ message: "Something went wrong" });
     }
   }
 );

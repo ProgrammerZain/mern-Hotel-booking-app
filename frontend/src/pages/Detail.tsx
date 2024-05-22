@@ -26,8 +26,8 @@ function Detail() {
         <h1 className="text-3xl font-bold">{hotel.name}</h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {hotel.imageUrls.map((image) => (
-          <div className="h-[300px]">
+        {hotel.imageUrls.map((image, index) => (
+          <div className="h-[300px]" key={index}>
             <img
               src={image}
               alt={hotel.name}
