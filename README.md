@@ -34,7 +34,7 @@ This project is made for a practice app for my `mern stack` skill and it uses fo
 
 in cmd:
 ```bash
-gh repo clone ProgrammerZain/mern-Hotel-booking-app
+ git  clone https://github.com/ProgrammerZain/mern-Hotel-booking-app.git
 ```
 after cloning first install all dependencies:
 ```bash
